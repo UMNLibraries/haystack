@@ -4,10 +4,12 @@
 
 ## Install
 
-* `$ git clone https://github.com/UMNLibraries/haystack.git`
-* `$ cd haystack;`
-* `$ yarn install`
-* `$ node run.js --help`
+ ```
+$ git clone https://github.com/UMNLibraries/haystack.git
+$ cd haystack
+$ yarn install
+$ node run.js --help
+```
 
 Download a zipped JSONL file (e.g. [DPLA bulk downloads](https://pro.dp.la/developers/bulk-download))
 
