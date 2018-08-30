@@ -15,10 +15,19 @@ Download a zipped JSONL file (e.g. [DPLA bulk downloads](https://pro.dp.la/devel
 
 ## Run
 
-`node run.js -i 'EXAMPLE.dpla.json.gz' -r 'http://hub-client.lib.umn.edu/lookups/34.json' -d 'batches'
+Run and store records locally:
 
+`node run.js -i 'EXAMPLE.dpla.json.gz' -r 'http://hub-client.lib.umn.edu/lookups/34.json' -d 'batches'`
 
-### regexURL Content Format:
+Run and store records in an AWS S3 bucket:
+
+`node run.js -i 'EXAMPLE.dpla.json.gz' -r 'http://hub-client.lib.umn.edu/lookups/34.json' -b 'mah-bucket'`
+
+(requires [AWS Environmental Variable Credentials]([https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-environment.html) to be present.
+
+Note: a `keys.json` file containing all keys pushed to the given bucket is itself pushed to the bucket. This is done to facilitate mass processing of records (rather than forcing clients to iterate individually through record keys using the AWS S3 API).
+
+### -r regexURL JSON File Description:
 
 * "include":  Include records that match any of the given RegEx patterns
   * "flags": RegEx [flags](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp)
