@@ -31,7 +31,7 @@ function saveExport(key) {
     Bucket: bucket,
     Key: key
    };
-   var jsonFile = require('fs').createWriteStream('./all.json.gz');
+   var jsonFile = require('fs').createWriteStream('./dpla.json.gz');
    S3.getObject(params).createReadStream().pipe(jsonFile);
 }
 
