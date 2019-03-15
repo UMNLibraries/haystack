@@ -2,6 +2,7 @@ var Rx = require('rx');
 const fs = require('fs');
 const zlib = require('zlib');
 const readline = require('readline');
+const { logger } = require('./logger');
 
 function openFileStream(fileName) {
   return readline.createInterface({
@@ -15,7 +16,13 @@ module.exports.fileReader = (fileName, regexes) => {
     let rowNum = 1;
     let lines = [];
     lineReader.on('line', (line) => {
-      lines.push(JSON.parse(line));
+      try {
+        let json = JSON.parse(line)
+        lines.push(json);
+      }
+      catch (err) {
+        logJsonError(line)
+      }
       if (lines.length == 1000) {
         observer.onNext({rows: lines, rowCount: rowNum, regexes: regexes})
         lines = []
@@ -27,5 +34,11 @@ module.exports.fileReader = (fileName, regexes) => {
       if (lines.length > 0) observer.onNext({rows: lines, rowCount: rowNum, regexes: regexes})
       observer.onCompleted();
     });
+  }).catch((err) => {
+    return Rx.Observable.empty()
   });
+}
+
+function logJsonError(data) {
+  fs.appendFile(`./logs/json_error.log`, `${data}\n`, () => { console.log('Error: check json_error.log')});
 }
