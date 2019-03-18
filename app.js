@@ -1,5 +1,3 @@
-const fs = require('fs');
-const rimraf = require('rimraf');
 const { fileSaver } = require('./file_saver');
 const { fileReader } = require('./file_reader');
 const { search } = require('./search');
@@ -14,7 +12,6 @@ module.exports.app = ({regexURL = false,
                        bucket = false,
                        batchDir = './batches',
                        logDir = './logs'}) => {
-  wipeLocalData(logDir, batchDir);
 
   return remoteRegexes(regexURL)
     .mergeMap(regexes => fileReader(inputFile, regexes))
@@ -26,15 +23,4 @@ module.exports.app = ({regexURL = false,
     .mergeMap(jsonFile => (jsonFile) ? logger(`${logDir}/keys.log`, jsonFile.name, jsonFile) : false)
     .mergeMap(jsonFile => s3Push(jsonFile, bucket))
     .mergeMap(jsonFile => fileSaver(jsonFile, batchDir));
-}
-
-function wipeLocalData(logDir, batchDir) {
-  truncate(`${logDir}/batches.log`, 'Cleared Batches Log');
-  truncate(`${logDir}/matches.log`, 'Cleared Matches Log');
-  truncate(`${logDir}/keys.log`, 'Cleared Batch Log');
-  rimraf(`${batchDir}/*`, () => console.log('Cleared Batches Directory'))
-}
-
-function truncate(filePath, message) {
-  fs.truncate(fs.openSync(filePath, 'r+'), 0, () => console.log(message) );
 }
