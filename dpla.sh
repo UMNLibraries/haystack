@@ -1,4 +1,13 @@
 #!/bin/bash
+
+if [ ! -d "./dpla_data" ]; then
+    mkdir 'dpla_data'
+fi
+
+# Get latest dpla dumps
+nvm use v8.10.0; time node get_latest_dpla.js;
+
+# Process dpla dumps
 FILES='./dpla_data/*'
 for f in $FILES
 do
