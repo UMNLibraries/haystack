@@ -55,17 +55,7 @@ function runMatcher(inputFile) {
       inputFile: inputFile,
       bucket: MATCH_BUCKET,
       batchDir: 'matches'
-  })
-  .subscribe(
-    () => {},
-    (err) => { console.log(err) },
-    () => {
-      if (program.bucket) {
-        s3Push(program.bucket, JSON.stringify(localKeys()), 'keys.json').subscribe();
-      }
-      console.log('--- done --- ');
-    }
-  );
+  });
 }
 
 async function haystackBuketItems() {
@@ -103,6 +93,8 @@ async function run() {
     s3delete(item)
   })
   await getLatestDplaAndMatch();
+
+  s3Push(MATCH_BUCKET, JSON.stringify(localKeys()), 'keys.json');
   console.log(`DPLA Done`);
 }
 
