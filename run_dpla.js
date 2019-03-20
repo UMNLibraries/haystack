@@ -54,7 +54,13 @@ function runMatcher(inputFile) {
       inputFile: inputFile,
       bucket: MATCH_BUCKET,
       batchDir: 'matches'
-  });
+  }).subscribe(
+    () => {},
+    (err) => { console.log(err) },
+    () => {
+      console.log(`Completed Matcher for ${inputFile}`);
+    }
+  );
 }
 
 async function haystackBuketItems() {
