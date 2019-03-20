@@ -1,6 +1,5 @@
 const AWS = require('aws-sdk');
 const fs = require('fs');
-const { program } = require('./program');
 const { app } = require('./app');
 const { localKeys } = require('./local_keys');
 const { s3Push } = require('./s3_push');
