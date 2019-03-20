@@ -92,9 +92,6 @@ async function run() {
     s3delete(item)
   })
   await getLatestDplaAndMatch();
-
-  s3Push(MATCH_BUCKET, JSON.stringify(localKeys()), 'keys.json');
-  console.log(`DPLA Done`);
 }
 
 run();
