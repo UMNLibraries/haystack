@@ -6,7 +6,7 @@ function wipeLocalData() {
   truncate(`logs/batches.log`, 'Cleared Batches Log');
   truncate(`logs/matches.log`, 'Cleared Matches Log');
   truncate(`logs/keys.log`, 'Cleared Batch Log');
-  rimraf.sync(`./batches/*`)
+  rimraf.sync(`./matches/*`)
   console.log('Cleared Batches Directory')
 }
 
