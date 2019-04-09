@@ -50,12 +50,12 @@ function runMatcher(inputFile) {
 
 async function runLocal() {
   await wipeLocalData();
-  // fs.readdir('./dpla_data', (err, files) => {
-  //   files.forEach(file => {
-  //     console.log(`Matching file ${file}`)
-  //     runMatcher(`./dpla_data/${file}`)
-  //   });
-  // });
+  fs.readdir('./dpla_data', (err, files) => {
+    files.forEach(file => {
+      console.log(`Matching file ${file}`)
+      runMatcher(`./dpla_data/${file}`)
+    });
+  });
 }
 
 runLocal();
