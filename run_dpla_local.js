@@ -2,10 +2,17 @@ const AWS = require('aws-sdk');
 const fs = require('fs');
 const { app } = require('./app');
 const { wipeLocalData } = require('./wipe_data');
+const rimraf = require('rimraf');
 
 const S3 = new AWS.S3({
   signatureVersion: 'v4'
 });
+
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 
 
 function saveExport(key) {
@@ -42,13 +49,13 @@ function runMatcher(inputFile) {
 }
 
 async function runLocal() {
-  wipeLocalData();
-  fs.readdir('./dpla_data', (err, files) => {
-    files.forEach(file => {
-      console.log(`Matching file ${file}`)
-      runMatcher(`./dpla_data/${file}`)
-    });
-  });
+  await wipeLocalData();
+  // fs.readdir('./dpla_data', (err, files) => {
+  //   files.forEach(file => {
+  //     console.log(`Matching file ${file}`)
+  //     runMatcher(`./dpla_data/${file}`)
+  //   });
+  // });
 }
 
 runLocal();
