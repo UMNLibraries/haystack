@@ -17,11 +17,11 @@ Download a zipped JSONL file (e.g. [DPLA bulk downloads](https://pro.dp.la/devel
 
 Run and store records locally:
 
-`node run.js -i 'EXAMPLE.dpla.json.gz' -r 'http://hub-client.lib.umn.edu/lookups/34.json' -d 'batches'`
+`node run.js -i 'EXAMPLE.dpla.json.gz' -r 'https://lib-metl-prd-01.oit.umn.edu/lookups/34.json' -d 'batches'`
 
 Run and store records in an AWS S3 bucket:
 
-`node run.js -i 'EXAMPLE.dpla.json.gz' -r 'http://hub-client.lib.umn.edu/lookups/34.json' -b 'mah-bucket'`
+`node run.js -i 'EXAMPLE.dpla.json.gz' -r 'https://lib-metl-prd-01.oit.umn.edu/lookups/34.json' -b 'mah-bucket'`
 
 (requires [AWS Environmental Variable Credentials]([https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-environment.html) to be present.
 

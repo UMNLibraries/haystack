@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk');
 const fs = require('fs');
 const { app } = require('./app');
-const { localKeys } = require('./local_keys');
+// const { localKeys } = require('./local_keys');
 const { s3Push } = require('./s3_push');
 const { wipeLocalData } = require('./wipe_data');
 
@@ -50,7 +50,7 @@ function saveExport(key) {
 
 function runMatcher(inputFile) {
   console.log(`Running Matcher On: ${inputFile}`);
-  app({ regexURL: 'http://hub-client.lib.umn.edu/lookups/34.json',
+  app({ regexURL: 'https://lib-metl-prd-01.oit.umn.edu/lookups/34.json',
       inputFile: inputFile,
       bucket: MATCH_BUCKET,
       batchDir: 'matches'

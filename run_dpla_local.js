@@ -36,7 +36,7 @@ function saveExport(key) {
 
 function runMatcher(inputFile) {
   console.log(`Running Matcher On: ${inputFile}`);
-  app({ regexURL: 'http://hub-client.lib.umn.edu/lookups/34.json',
+  app({ regexURL: 'https://lib-metl-prd-01.oit.umn.edu/lookups/34.json',
       inputFile: inputFile,
       batchDir: 'matches'
   }).subscribe(

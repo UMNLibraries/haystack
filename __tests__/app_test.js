@@ -7,7 +7,7 @@ const appPath = `${dirPath}/app`
 
 test('matches ans saves records', done => {
 
-    app({regexURL: 'http://hub-client.lib.umn.edu/lookups/34.json',
+    app({regexURL: 'https://lib-metl-prd-01.oit.umn.edu/lookups/34.json',
          inputFile: `${appPath}/jsonl_file.json.gz`,
          batchDir: `${appPath}/batches`,
          logDir: `${appPath}/logs`

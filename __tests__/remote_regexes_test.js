@@ -2,7 +2,7 @@ const { remoteRegexes } = require('../remote_regexes');
 const { of } = require('rxjs');
 
 test('returns a set of regular expressions', done => {
-  const regex = remoteRegexes('http://hub-client.lib.umn.edu/lookups/35.json')
+  const regex = remoteRegexes('https://lib-metl-prd-01.oit.umn.edu/lookups/35.json')
   regex.subscribe(
     (regexp) => {
       //Without try/catch, errors for Observables that return an promise are swallowed by Jest/Jasmine
