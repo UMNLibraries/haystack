@@ -2,3 +2,5 @@ __tests__/batches/
 logs/
 node_modules/
 *.log
+/matches
+/dpla_data
