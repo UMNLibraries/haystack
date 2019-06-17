@@ -12,7 +12,7 @@ const S3 = new AWS.S3({
 var logDir = './logs'
 var dplaBucket = 'dpla-provider-export';
 var dplaDataDir = './dpla_data';
-var batchDir = (program.batchDir ? program.batchDir : './matches');
+var matchesDir = (program.matchesDir ? program.matchesDir : './matches');
 var regexURL = (program.regexURL ? program.regexURL : 'https://lib-metl-prd-01.oit.umn.edu/lookups/34.json');
 // Config
 
@@ -21,7 +21,7 @@ init();
 // Create log files and directories
 function init() {
 
-  var dirs = [logDir, batchDir, dplaDataDir];
+  var dirs = [logDir, matchesDir, dplaDataDir];
   var logFiles = ['logs/batches.log', 'logs/matches.log', 'logs/keys.log'];
   dirs.map(dir => { mkDir(dir); console.log(`mkdir ${dir}`) });
   logFiles.map(path => { touch(path); console.log(`touch ${path}`) });
@@ -35,8 +35,10 @@ function init() {
       fs.mkdirSync(dir);
     }
   }
-}
 
+  // Clear Logs and matches dir
+  wipeLocalData(matchesDir);
+}
 
 function getLatestDplaAndMatch() {
   var today = new Date();
@@ -79,7 +81,7 @@ function runMatcher(inputFile) {
   app({ regexURL: regexURL,
       inputFile: inputFile,
       bucket: false,
-      batchDir: batchDir
+      matchesDir: matchesDir
   }).subscribe(
     () => {},
     (err) => { console.log(err) },
@@ -90,7 +92,6 @@ function runMatcher(inputFile) {
 }
 
 async function run() {
-  wipeLocalData();
   await getLatestDplaAndMatch();
 }
 
