@@ -10,7 +10,7 @@ const { jsonFile } = require('./json_file')
 module.exports.app = ({regexURL = false,
                        inputFile = false,
                        bucket = false,
-                       batchDir = './batches',
+                       matchesDir = './matches',
                        logDir = './logs'}) => {
 
   return remoteRegexes(regexURL)
@@ -22,5 +22,5 @@ module.exports.app = ({regexURL = false,
     .mergeMap(matches  => (matches.length > 0) ? jsonFile(matches) : false)
     .mergeMap(jsonFile => (jsonFile) ? logger(`${logDir}/keys.log`, jsonFile.name, jsonFile) : false)
     .mergeMap(jsonFile => s3Push(jsonFile, bucket))
-    .mergeMap(jsonFile => fileSaver(jsonFile, batchDir));
+    .mergeMap(jsonFile => fileSaver(jsonFile, matchesDir));
 }
